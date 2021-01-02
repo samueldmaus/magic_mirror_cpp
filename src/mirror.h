@@ -7,6 +7,8 @@ class MyApp : public wxApp
 {
 public:
     virtual bool OnInit();
+private:
+    wxLocale locale;
 };
 
 #endif
