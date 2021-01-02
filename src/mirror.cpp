@@ -1,4 +1,5 @@
-#include "mirror.h"
+#include "Mirror.h"
+#include "TimeDate.h"
 
 // create app
 bool MyApp::OnInit() {
@@ -7,12 +8,6 @@ bool MyApp::OnInit() {
     cpp_magic_mirror->Show(true);
     SetTopWindow(cpp_magic_mirror);
     return true;
-}
-
-MirrorFrame::MirrorFrame(const wxString& title)
-       : wxFrame(NULL, wxID_ANY, title, wxPoint(-1, -1))
-{
-
 }
 
 IMPLEMENT_APP(MyApp)

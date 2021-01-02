@@ -3,12 +3,6 @@
 
 #include <wx/wx.h>
 
-class MirrorFrame : public wxFrame
-{
-public:
-    MirrorFrame(const wxString& title);
-};
-
 class MyApp : public wxApp
 {
 public:
