@@ -13,7 +13,9 @@ private:
     wxTimer digital_clock_timer;
     void OnUpdateClock(wxTimerEvent&);
     void UpdateClock();
-    void PaintAnalogClock(wxPanel *panel);
+    void PaintAnalogClock(wxPaintEvent &evt);
+
+    DECLARE_EVENT_TABLE();
 };
 
 #endif
