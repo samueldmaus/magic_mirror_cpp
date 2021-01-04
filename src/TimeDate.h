@@ -7,12 +7,13 @@
 class TimePanel : public wxPanel
 {
 public:
-    TimePanel(wxFrame* parent);
+    TimePanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize size);
 private:
-    wxStaticText* d_clock_display;
-    wxTimer clock_timer;
+    wxStaticText* digital_clock_display;
+    wxTimer digital_clock_timer;
     void OnUpdateClock(wxTimerEvent&);
     void UpdateClock();
+    void PaintAnalogClock(wxPanel *panel);
 };
 
 #endif

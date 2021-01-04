@@ -1,14 +1,15 @@
 #include "TimeDate.h"
 
-TimePanel::TimePanel(wxFrame* parent)
-       : wxPanel(parent)
+TimePanel::TimePanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize size)
+       : wxPanel(parent, id, point, size)
 {
-    d_clock_display = new wxStaticText(this, wxID_ANY, "");
-    wxFont font = d_clock_display->GetFont();
+    digital_clock_display = new wxStaticText(this, wxID_ANY, "");
+    wxFont font = digital_clock_display->GetFont();
     font.MakeBold().MakeLarger();
     UpdateClock();
-    clock_timer.Bind(wxEVT_TIMER, &TimePanel::OnUpdateClock, this);
-    clock_timer.Start(1000);
+    PaintAnalogClock(this);
+    digital_clock_timer.Bind(wxEVT_TIMER, &TimePanel::OnUpdateClock, this);
+    digital_clock_timer.Start(1000);
 }
 
 void TimePanel::OnUpdateClock(wxTimerEvent&) {
@@ -17,8 +18,10 @@ void TimePanel::OnUpdateClock(wxTimerEvent&) {
 
 void TimePanel::UpdateClock() {
     // update the digital clock
-    d_clock_display->SetLabel(wxDateTime::Now().FormatTime());
+    digital_clock_display->SetLabel(wxDateTime::Now().FormatTime());
+}
 
-    // update the analog clock
-    
+void TimePanel::PaintAnalogClock(wxPanel *panel) {
+    wxClientDC time_dc(panel);
+    time_dc.DrawCircle(10, 10, 10);
 }

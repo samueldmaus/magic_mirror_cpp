@@ -10,6 +10,7 @@ public:
     MirrorFrame(const wxString& title);
 private:
     TimePanel *time_date_panel;
+    wxBoxSizer *vbox;
 };
 
 #endif
