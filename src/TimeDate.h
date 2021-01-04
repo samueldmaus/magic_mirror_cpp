@@ -4,10 +4,10 @@
 #include <wx/wx.h>
 
 
-class MirrorFrame : public wxFrame
+class TimePanel : public wxPanel
 {
 public:
-    MirrorFrame(const wxString& title);
+    TimePanel(wxFrame* parent);
 private:
     wxStaticText* d_clock_display;
     wxTimer clock_timer;
