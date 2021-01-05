@@ -35,7 +35,6 @@ void TimePanel::PaintAnalogClock(wxPaintEvent &evt) {
     wxPoint c = wxPoint(panel_size.x/2, panel_size.y/2);
     //time_dc.DrawRectangle(panel_size.x/4, 15, panel_size.x/2, panel_size.y/8);
     time_dc.DrawCircle(c.x, c.y, r);
-
     for(double i = 1.0; i <= 60.0; i++) {
         double outer_x = sin(i / 60 * 2 * PI) * 150 * 0.95 + 250;
         double outer_y = -cos(i / 60 * 2 * PI) * 150 * 0.95 + 250;
