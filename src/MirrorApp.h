@@ -1,5 +1,5 @@
-#ifndef MIRROR_H
-#define MIRROR_H
+#ifndef MIRROR_APP_H
+#define MIRROR_APP_H
 
 #include <wx/wx.h>
 

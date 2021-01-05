@@ -1,4 +1,4 @@
-#include "Mirror.h"
+#include "MirrorApp.h"
 #include "MirrorFrame.h"
 
 // create app
