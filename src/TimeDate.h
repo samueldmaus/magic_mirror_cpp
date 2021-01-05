@@ -3,7 +3,6 @@
 
 #include <wx/wx.h>
 
-
 class TimePanel : public wxPanel
 {
 public:
@@ -11,10 +10,12 @@ public:
 private:
     wxStaticText* digital_clock_display;
     wxTimer digital_clock_timer;
+    wxTimer analog_clock_timer;
     void OnUpdateClock(wxTimerEvent&);
     void UpdateClock();
     void PaintAnalogClock(wxPaintEvent &evt);
-
+    void AnalogClockUpdate(wxTimerEvent&);
+    
     DECLARE_EVENT_TABLE();
 };
 
