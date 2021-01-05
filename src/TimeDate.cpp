@@ -1,6 +1,4 @@
 #include "TimeDate.h"
-#include <cmath>
-#include <iostream>
 
 #define PI 3.141592653589793238462643383279502884197
 
@@ -36,19 +34,25 @@ void TimePanel::PaintAnalogClock(wxPaintEvent &evt) {
     wxCoord r = 150;
     wxPoint c = wxPoint(panel_size.x/2, panel_size.y/2);
     //time_dc.DrawRectangle(panel_size.x/4, 15, panel_size.x/2, panel_size.y/8);
-    //time_dc.DrawCircle(panel_size.x/2, panel_size.y/2, r);
-    float outer_point = r - 5;
+    time_dc.DrawCircle(c.x, c.y, r);
 
-    time_dc.DrawLine(wxPoint(c.x, c.y + (r - 15)), wxPoint(c.x, c.y + (r - 5)));
-    time_dc.DrawLine(wxPoint(c.x + (r - 15), c.y), wxPoint(c.x + (r - 5), c.y));
-    time_dc.DrawLine(wxPoint(c.x - (r - 15), c.y), wxPoint(c.x - (r - 5), c.y));
-    time_dc.DrawPoint(wxPoint(sin(PI)*150+250, -cos(PI)*150+250));
-    for(double i = 1; i <= 60; i++) {
-        double point_x = sin(i / 60 * 2 * PI) * 150 + 250;
-        double point_y = -cos(i / 60 * 2 * PI) * 150 + 250;
-        wxPoint dot = wxPoint(point_x, point_y);
-        time_dc.DrawPoint(dot);
-        std::cout << "i = " << i << "(" << point_x << ", " << point_y<< ")" << std::endl;
+    for(double i = 1.0; i <= 60.0; i++) {
+        double outer_x = sin(i / 60 * 2 * PI) * 150 * 0.95 + 250;
+        double outer_y = -cos(i / 60 * 2 * PI) * 150 * 0.95 + 250;
+        wxPoint point_outer = wxPoint(outer_x, outer_y);
+        if(std::fmod(i, 5.0) == 0) {
+            double inner_x = sin(i / 60 * 2 * PI) * 150 * 0.83 + 250;
+            double inner_y = -cos(i / 60 * 2 * PI) * 150 * 0.83 + 250;
+            wxPoint point_inner = wxPoint(inner_x, inner_y);
+            time_dc.SetPen(wxPen(*wxRED_PEN));
+            time_dc.DrawLine(point_inner, point_outer);
+        } else {
+            double inner_x = sin(i / 60 * 2 * PI) * 150 * 0.88 + 250;
+            double inner_y = -cos(i / 60 * 2 * PI) * 150 * 0.88 + 250;
+            wxPoint point_inner = wxPoint(inner_x, inner_y);
+            time_dc.SetPen(wxPen(*wxBLACK_PEN));
+            time_dc.DrawLine(point_inner, point_outer);
+        }
     }
 }
 

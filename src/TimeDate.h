@@ -2,6 +2,7 @@
 #define TIME_DATE_H
 
 #include <wx/wx.h>
+#include <cmath>
 
 class TimePanel : public wxPanel
 {
