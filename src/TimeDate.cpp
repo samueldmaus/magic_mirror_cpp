@@ -46,6 +46,10 @@ void TimePanel::PaintAnalogClock(wxPaintEvent &evt) {
             wxPoint point_inner = wxPoint(inner_x, inner_y);
             time_dc.SetPen(wxPen(*wxRED_PEN));
             time_dc.DrawLine(point_inner, point_outer);
+            double text_x = sin(i / 60 * 2 * PI) * 150 * 0.75 + 245;
+            double text_y = -cos(i / 60 * 2 * PI) * 150 * 0.75 + 245;
+            wxString hour_text = wxString::Format(wxT("%i"), int(i/5));
+            time_dc.DrawText(hour_text, text_x, text_y);
         } else {
             double inner_x = sin(i / 60 * 2 * PI) * 150 * 0.88 + 250;
             double inner_y = -cos(i / 60 * 2 * PI) * 150 * 0.88 + 250;
