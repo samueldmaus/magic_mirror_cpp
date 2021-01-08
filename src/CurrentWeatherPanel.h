@@ -1,5 +1,5 @@
-#ifndef CURRENT_WEATHER_H
-#define CURRENT_WEATHER_H
+#ifndef CURRENT_WEATHER_PANEL_H
+#define CURRENT_WEATHER_PANEL_H
 
 #include <iostream>
 #include <stdlib.h>

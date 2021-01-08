@@ -12,6 +12,5 @@ include(${wxWidgets_USE_FILE})
 file(GLOB project_SRCS src/*.cpp)
 
 add_executable(mirror ${project_SRCS})
-target_link_libraries(cpprestsdk::cpprest)
-target_link_libraries(mirror ${wxWidgets_LIBRARIES})
+target_link_libraries(mirror ${wxWidgets_LIBRARIES} cpprestsdk::cpprest)
 target_include_directories(mirror PRIVATE ${wxWidgets_INCLUDE_DIRS})

@@ -1,5 +1,5 @@
-#ifndef TIME_DATE_H
-#define TIME_DATE_H
+#ifndef TIME_DATE_PANEL_H
+#define TIME_DATE_PANEL_H
 
 #include <wx/wx.h>
 #include <cmath>

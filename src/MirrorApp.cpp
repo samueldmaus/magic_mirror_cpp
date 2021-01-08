@@ -1,6 +1,5 @@
 #include "MirrorApp.h"
 #include "MirrorFrame.h"
-#include "CurrentWeather.h"
 
 // create app
 bool MyApp::OnInit() {
