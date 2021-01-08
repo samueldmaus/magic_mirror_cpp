@@ -16,7 +16,6 @@ private:
     void UpdateClock();
     void PaintAnalogClock(wxPaintEvent &evt);
     void AnalogClockUpdate(wxTimerEvent&);
-    
     DECLARE_EVENT_TABLE();
 };
 

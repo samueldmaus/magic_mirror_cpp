@@ -1,5 +1,6 @@
 #include "MirrorApp.h"
 #include "MirrorFrame.h"
+#include "CurrentWeather.h"
 
 // create app
 bool MyApp::OnInit() {
@@ -9,7 +10,6 @@ bool MyApp::OnInit() {
     cpp_magic_mirror->Show(true);
     SetTopWindow(cpp_magic_mirror);
     return true;
-
 }
 
 IMPLEMENT_APP(MyApp)
