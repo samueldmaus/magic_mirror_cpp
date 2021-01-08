@@ -14,10 +14,10 @@ class WeatherPanel : public wxPanel
 {
 public:
     WeatherPanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize size);
-	static utility::string_t GetEnvAPI(std::string const &key);
-	int GetTemperature();
+	void GetEnvAPI(std::string const &key);
+	void GetTemperature();
 private:
-	int temperature;
+	wxString temperature;
 	utility::string_t url;
 	utility::string_t zip_code;
 	utility::string_t api_key;

@@ -3,24 +3,27 @@
 WeatherPanel::WeatherPanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize size)
        : wxPanel(parent, id, point, size)
 {
-    
+    WeatherPanel::GetEnvAPI("OPEN_WEATHER_API");
+    WeatherPanel::GetTemperature();
+    wxStaticText *local_temp = new wxStaticText(this, wxID_ANY, WeatherPanel::temperature);
 }
 
-utility::string_t WeatherPanel::GetEnvAPI(std::string const &key) {
-    utility::string_t val = getenv(key.c_str());
-    return val;
+void WeatherPanel::GetEnvAPI(std::string const &key) {
+    const char *val = getenv(key.c_str());
+    std::string str_val(val);
+    WeatherPanel::api_key = str_val;
 }
 
-int WeatherPanel::GetTemperature() {
-    utility::string_t url = "http://api.openweathermap.org/data/2.5/weather?zip=";
-	utility::string_t zip = "55057";
-	utility::string_t key = WeatherPanel::GetEnvAPI("OPEN_WEATHER_API");
-    url += zip + key;
-    web::http::client::http_client weather_client(url);
+void WeatherPanel::GetTemperature() {
+    WeatherPanel::url = "http://api.openweathermap.org/data/2.5/weather?zip=";
+	WeatherPanel::zip_code = "55057";
+    WeatherPanel::url += WeatherPanel::zip_code + WeatherPanel::api_key;
+    web::http::client::http_client weather_client(WeatherPanel::url);
     pplx::task<web::http::http_response> response = weather_client.request(web::http::methods::GET);
     web::http::http_response data = response.get();
     pplx::task<web::json::value> weather_json = data.extract_json();
     weather_data = weather_json.get();
-    int temp = weather_data.at(U("main")).at(U("temp")).as_integer();
-    return temp;
+    double temp = weather_data.at(U("main")).at(U("temp")).as_double();
+    double fahrenheit_temp = ((9.00 / 5.00) * (temp - 273.00)) + 32.00;
+    WeatherPanel::temperature = wxString::Format(wxT("%f"),fahrenheit_temp);
 }
