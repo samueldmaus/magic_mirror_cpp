@@ -9,14 +9,15 @@ END_EVENT_TABLE()
 TimePanel::TimePanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize size)
        : wxPanel(parent, id, point, size)
 {
-    digital_clock_display = new wxStaticText(this, wxID_ANY, "");
-    wxFont font = digital_clock_display->GetFont();
-    font.MakeBold().MakeLarger();
+    time_sizer = new wxBoxSizer(wxHORIZONTAL);
+    digital_clock_display = new wxStaticText(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL | wxST_NO_AUTORESIZE);
+    time_sizer->Add(digital_clock_display, 1, wxEXPAND);
     UpdateClock();
     digital_clock_timer.Bind(wxEVT_TIMER, &TimePanel::OnUpdateClock, this);
     analog_clock_timer.Bind(wxEVT_TIMER, &TimePanel::AnalogClockUpdate, this);
     digital_clock_timer.Start(1000);
     analog_clock_timer.Start(1000);
+    this->SetSizer(time_sizer);
 }
 
 void TimePanel::OnUpdateClock(wxTimerEvent&) {

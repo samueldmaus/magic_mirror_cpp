@@ -23,7 +23,7 @@ void WeatherPanel::GetTemperature() {
     web::http::http_response data = response.get();
     pplx::task<web::json::value> weather_json = data.extract_json();
     weather_data = weather_json.get();
-    double temp = weather_data.at(U("main")).at(U("temp")).as_double();
-    double fahrenheit_temp = ((9.00 / 5.00) * (temp - 273.00)) + 32.00;
-    WeatherPanel::temperature = wxString::Format(wxT("%f"),fahrenheit_temp);
+    int temp = weather_data.at(U("main")).at(U("temp")).as_integer();
+    int fahrenheit_temp = ((9.00 / 5.00) * (temp - 273.00)) + 32.00;
+    WeatherPanel::temperature = wxString::Format(wxT("%i "),fahrenheit_temp);
 }
