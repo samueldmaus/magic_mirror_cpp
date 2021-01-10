@@ -9,14 +9,14 @@ WeatherPanel::WeatherPanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize
 }
 
 void WeatherPanel::GetEnvAPI(std::string const &key) {
-    const char *val = getenv(key.c_str());
+    char *val = getenv(key.c_str());
     std::string str_val(val);
     WeatherPanel::api_key = str_val;
 }
 
 void WeatherPanel::GetTemperature() {
     WeatherPanel::url = "http://api.openweathermap.org/data/2.5/weather?zip=";
-	WeatherPanel::zip_code = "55057";
+	WeatherPanel::zip_code = "55057&appid=";
     WeatherPanel::url += WeatherPanel::zip_code + WeatherPanel::api_key;
     web::http::client::http_client weather_client(WeatherPanel::url);
     pplx::task<web::http::http_response> response = weather_client.request(web::http::methods::GET);
