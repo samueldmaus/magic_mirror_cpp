@@ -25,5 +25,5 @@ void WeatherPanel::GetTemperature() {
     weather_data = weather_json.get();
     int temp = weather_data.at(U("main")).at(U("temp")).as_integer();
     int fahrenheit_temp = ((9.00 / 5.00) * (temp - 273.00)) + 32.00;
-    WeatherPanel::temperature = wxString::Format(wxT("%i "),fahrenheit_temp);
+    WeatherPanel::temperature = wxString::Format(wxT("Current Temperature: %i\xB0 F"),fahrenheit_temp);
 }
