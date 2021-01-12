@@ -39,9 +39,13 @@ std::pair<wxDateTime, std::string> TimePanel::AMorPM(wxDateTime &time){
     if(hr == 0) {
         time.SetHour(12);
         meridiem = "AM";
-    } else if (hr > 12) {
-        time.SetHour(hr - 12);
-        meridiem = "PM";
+    } else if (hr >= 12) {
+        if(hr == 12) {
+            meridiem = "PM";
+        } else {
+            time.SetHour(hr - 12);
+            meridiem = "PM";
+        }
     } else {
         meridiem = "AM";
     }
