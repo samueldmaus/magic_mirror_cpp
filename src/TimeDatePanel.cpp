@@ -26,7 +26,26 @@ void TimePanel::OnUpdateClock(wxTimerEvent&) {
 
 void TimePanel::UpdateClock() {
     // update the digital clock
-    digital_clock_display->SetLabel(wxDateTime::Now().FormatTime());
+    wxDateTime time = wxDateTime::Now();
+    std::pair<wxDateTime, std::string> time_pair = AMorPM(time);
+    digital_clock_display->SetLabel(time_pair.first.FormatTime() + " " + time_pair.second);
+}
+
+std::pair<wxDateTime, std::string> TimePanel::AMorPM(wxDateTime &time){
+    std::string meridiem;
+    int hr = time.GetHour();
+    int min = time.GetMinute();
+    int sec = time.GetSecond();
+    if(hr == 0) {
+        time.SetHour(12);
+        meridiem = "AM";
+    } else if (hr > 12) {
+        time.SetHour(hr - 12);
+        meridiem = "PM";
+    } else {
+        meridiem = "AM";
+    }
+    return make_pair(time, meridiem);
 }
 
 void TimePanel::PaintAnalogClock(wxPaintEvent &evt) {

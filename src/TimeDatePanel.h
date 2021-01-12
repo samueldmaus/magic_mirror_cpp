@@ -15,6 +15,7 @@ private:
     wxTimer analog_clock_timer;
     void OnUpdateClock(wxTimerEvent&);
     void UpdateClock();
+    std::pair<wxDateTime, std::string> AMorPM(wxDateTime &time);
     void PaintAnalogClock(wxPaintEvent &evt);
     void AnalogClockUpdate(wxTimerEvent&);
     DECLARE_EVENT_TABLE();
