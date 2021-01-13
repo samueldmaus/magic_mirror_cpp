@@ -9,8 +9,11 @@ class TimePanel : public wxPanel
 public:
     TimePanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize size);
 private:
+    wxBoxSizer* panel_sizer;
     wxBoxSizer* time_sizer;
+    wxBoxSizer* date_sizer;
     wxStaticText* digital_clock_display;
+    wxStaticText* day_date;
     wxTimer digital_clock_timer;
     wxTimer analog_clock_timer;
     void OnUpdateClock(wxTimerEvent&);

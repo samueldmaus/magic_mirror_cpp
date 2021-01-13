@@ -1,4 +1,6 @@
 #include "TimeDatePanel.h"
+#include <iostream>
+#include <fstream>
 
 #define PI 3.141592653589793238462643383279502884197
 
@@ -9,15 +11,24 @@ END_EVENT_TABLE()
 TimePanel::TimePanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize size)
        : wxPanel(parent, id, point, size)
 {
-    time_sizer = new wxBoxSizer(wxHORIZONTAL);
+    panel_sizer = new wxBoxSizer(wxVERTICAL);
+    // time stuff
     digital_clock_display = new wxStaticText(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL | wxST_NO_AUTORESIZE);
+    time_sizer = new wxBoxSizer(wxHORIZONTAL);
     time_sizer->Add(digital_clock_display, 1, wxEXPAND);
+    // date stuff
+    day_date = new wxStaticText(this, wxID_ANY, "Tuesday", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL | wxST_NO_AUTORESIZE);
+    date_sizer = new wxBoxSizer(wxHORIZONTAL);
+    date_sizer->Add(day_date, 1, wxEXPAND);
+
     UpdateClock();
     digital_clock_timer.Bind(wxEVT_TIMER, &TimePanel::OnUpdateClock, this);
     analog_clock_timer.Bind(wxEVT_TIMER, &TimePanel::AnalogClockUpdate, this);
     digital_clock_timer.Start(1000);
     analog_clock_timer.Start(1000);
-    this->SetSizer(time_sizer);
+    panel_sizer->Add(time_sizer, 0, wxEXPAND);
+    panel_sizer->Add(date_sizer, 0, wxEXPAND);
+    this->SetSizer(panel_sizer);
 }
 
 void TimePanel::OnUpdateClock(wxTimerEvent&) {
