@@ -3,6 +3,7 @@
 
 #include <wx/wx.h>
 #include <cmath>
+#include <stdio.h>
 
 class TimePanel : public wxPanel
 {
@@ -21,6 +22,7 @@ private:
     std::pair<wxDateTime, std::string> AMorPM(wxDateTime &time);
     void PaintAnalogClock(wxPaintEvent &evt);
     void AnalogClockUpdate(wxTimerEvent&);
+    void GetDate();
     DECLARE_EVENT_TABLE();
 };
 

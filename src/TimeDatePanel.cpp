@@ -1,6 +1,4 @@
 #include "TimeDatePanel.h"
-#include <iostream>
-#include <fstream>
 
 #define PI 3.141592653589793238462643383279502884197
 
@@ -21,6 +19,7 @@ TimePanel::TimePanel(wxFrame* parent, wxWindowID id, wxPoint point, wxSize size)
     date_sizer = new wxBoxSizer(wxHORIZONTAL);
     date_sizer->Add(day_date, 1, wxEXPAND);
 
+    GetDate();
     UpdateClock();
     digital_clock_timer.Bind(wxEVT_TIMER, &TimePanel::OnUpdateClock, this);
     analog_clock_timer.Bind(wxEVT_TIMER, &TimePanel::AnalogClockUpdate, this);
@@ -107,3 +106,14 @@ void TimePanel::PaintAnalogClock(wxPaintEvent &evt) {
 void TimePanel::AnalogClockUpdate(wxTimerEvent&) {
     Refresh();
 }
+
+ void TimePanel::GetDate() {
+     std::string date = "";
+     char buff[BUFSIZ];
+     FILE *fp = popen("date", "r");
+     if (fgets(buff, BUFSIZ, fp) != NULL) {
+         date += buff;
+         day_date->SetLabel(date.substr(0, 10));
+     };
+     pclose(fp);
+ }
